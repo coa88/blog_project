@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+ 
+<tiles-definitions>
+    <!-- 메뉴 탭 타일즈 -->
+    <definition name="default-layouts"	template="/WEB-INF/tiles/default-layouts.jsp">
+        <put-attribute name="header"	value="/WEB-INF/tiles/inc/header.jsp" />
+    </definition>
+ 
+    <definition name="*" extends="default-layouts">
+        <put-attribute name="body" value="/WEB-INF/jsp/{1}.jsp" />
+    </definition>
+   
+   <definition name="board/*" extends="default-layouts">
+        <put-attribute name="body" value="/WEB-INF/jsp/board/{1}.jsp" />
+    </definition>
+    
+    <definition name="user/*" extends="default-layouts">
+        <put-attribute name="body" value="/WEB-INF/jsp/user/{1}.jsp" />
+    </definition>
+    
+    
+</tiles-definitions>

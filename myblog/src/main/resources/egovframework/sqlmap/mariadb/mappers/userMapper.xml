@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="egovframework.myblog.core.service.UserMapper">
+
+	<insert id="insUser">
+        INSERT INTO blog_user
+		(
+			user_id
+			,user_pw
+			,nm
+			,phone_num
+			,user_mail	)
+		VALUES
+		(
+			#{userId}
+			,#{userPw}
+			,#{nm}
+			,#{phoneNum}
+			,#{userMail}
+		)
+    </insert>
+
+    <select id="selUserList" resultType="egovframework.myblog.core.vo.UserVo">
+        SELECT * FROM blog_user
+        ORDER BY user_id DESC
+    </select>
+    
+    <select id="selUser" resultType="egovframework.myblog.core.vo.UserVo">
+        SELECT * FROM blog_user
+        WHERE user_id = #{userId}
+    </select>
+    
+    <!-- 이웃 -->
+    <insert id="insNeighbor" parameterType="egovframework.myblog.core.vo.BoardDTO">
+		INSERT INTO neighbor
+		(user_id, neighbor_id)
+		VALUES
+		(#{userId}, #{neighborId})
+	</insert>
+
+	<select id="selNeighbor" resultType="_int">
+		SELECT COUNT(user_id) 
+		FROM neighbor
+		WHERE user_id = #{userId} AND neighbor_id = #{neighborId}
+	</select>
+	
+	<select id="selNeighborList" resultType="egovframework.myblog.core.vo.UserDTO">
+        SELECT * 
+        FROM neighbor
+		WHERE user_id = #{userId}
+    </select>
+
+	<delete id="delNeighbor" parameterType="egovframework.myblog.core.vo.UserDTO">
+		DELETE FROM neighbor
+		WHERE user_id = #{userId} AND neighbor_id = #{neighborId}
+	</delete>
+    
+ 
+</mapper>
+
